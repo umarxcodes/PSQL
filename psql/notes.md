@@ -308,6 +308,11 @@ ALTER TABLE users RENAME TO app_users;
 INSERT INTO users (email, username, full_name, age)
 VALUES ('umar@gmail.com', 'umar_dev', 'Umar Khan', 22);
 
+
+INSERT INTO users (name, email, role)
+VALUES ('Zain', 'zain@gmail.com', 'user')
+RETURNING *;
+
 -- Multiple rows (much faster than individual inserts)
 INSERT INTO users (email, username, age)
 VALUES
@@ -476,6 +481,15 @@ SELECT * FROM users
 ORDER BY created_at DESC
 LIMIT 10
 OFFSET 10;   -- page 2
+
+
+
+SELECT * FROM users LIMIT 5 OFFSET 5;
+Meaning:
+
+👉 Skip first 5 users
+👉 Then show next 5 users
+
 ```
 
 > 🔥 **Senior Tip:** `OFFSET` pagination becomes slow on large tables. For high-performance pagination, use **keyset pagination** (cursor-based):
